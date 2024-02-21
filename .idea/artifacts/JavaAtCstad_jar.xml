@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="JavaAtCstad:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/JavaAtCstad_jar</output-path>
+    <root id="archive" name="JavaAtCstad.jar">
+      <element id="module-output" name="JavaAtCstad" />
+    </root>
+  </artifact>
+</component>
