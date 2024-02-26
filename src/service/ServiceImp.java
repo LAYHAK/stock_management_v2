@@ -84,8 +84,8 @@ public class ServiceImp implements Service {
 
     @Override
     public void generateReport(int numberOfProducts) {
-
-        String filePath = "products.CSV";
+        String folder ="src/transaction/";
+        String filePath =folder+"transaction.dat";
         int lastId = 0; // Variable to hold the last used ID
 
         // Read the last product ID from the file

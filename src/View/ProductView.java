@@ -7,6 +7,7 @@ import org.nocrala.tools.texttablefmt.BorderStyle;
 import org.nocrala.tools.texttablefmt.ShownBorders;
 import org.nocrala.tools.texttablefmt.Table;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.ListIterator;
 import java.util.Scanner;
@@ -14,7 +15,6 @@ import java.util.Scanner;
 public class ProductView {
     public static final String ANSI_BLUE = "\u001B[32m";
     public static final String ANSI_RESET = "\u001B[0m";
-    private final Scanner scanner = new Scanner(System.in);
 
     public void paginationOption() {
         Table tableMenu = new Table(6, BorderStyle.DESIGN_CURTAIN);
@@ -57,37 +57,39 @@ public class ProductView {
         static ProductController productController = new ProductController();
 
         public static void welcomeMsg() {
-            System.out.println("");
             System.out.println("✨  WELCOME TO STOCK MANAGEMENT SYSTEM  ✨");
-            System.out.println(
-                    "\n" +
-                            " ██████╗███████╗████████╗ █████╗ ██████╗     ███████╗███╗   ███╗███████╗  \n" +
-                            "██╔════╝██╔════╝╚══██╔══╝██╔══██╗██╔══██╗    ██╔════╝████╗ ████║██╔════╝   \n" +
-                            "██║     ███████╗   ██║   ███████║██║  ██║    ███████╗██╔████╔██║███████╗   \n" +
-                            "██║     ╚════██║   ██║   ██╔══██║██║  ██║    ╚════██║██║╚██╔╝██║╚════██║   \n" +
-                            "╚██████╗███████║   ██║   ██║  ██║██████╔╝    ███████║██║ ╚═╝ ██║███████║   \n" +
-                            "╚═════╝╚══════╝   ╚═╝   ╚═╝  ╚═╝╚═════╝     ╚══════╝╚═╝     ╚═╝╚══════╝    \n"
+            System.out.println("""
+                     ██████╗███████╗████████╗ █████╗ ██████╗       ███████╗███╗   ███╗███████╗
+                    ██╔════╝██╔════╝╚══██╔══╝██╔══██╗██╔══██╗       ██╔════╝████╗ ████║██╔════╝
+                    ██║     ███████╗   ██║   ███████║██║  ██║█████╗███████╗██╔████╔██║███████╗
+                    ██║     ╚════██║   ██║   ██╔══██║██║  ██║╚════╝╚════██║██║╚██╔╝██║╚════██║
+                    ╚██████╗███████║   ██║   ██║  ██║██████╔╝      ███████║██║ ╚═╝ ██║███████║
+                     ╚═════╝╚══════╝   ╚═╝   ╚═╝  ╚═╝╚═════╝       ╚══════╝╚═╝     ╚═╝╚══════╝
+                                                """
             );
         }
 
         public static void createTable() {
             Scanner sc = new Scanner(System.in);
             System.out.println("#  Application Menu");
-            Table table = new Table(9, BorderStyle.UNICODE_BOX_DOUBLE_BORDER_WIDE, ShownBorders.SURROUND);
-            table.addCell("".repeat(4) + " | Disp(l)ay" + "".repeat(4));
-            table.addCell("".repeat(4) + " | Rando(m)" + "".repeat(4));
-            table.addCell("".repeat(4) + " | (W)rite" + "".repeat(4));
-            table.addCell("".repeat(4) + " | (E)dit" + "".repeat(4));
-            table.addCell("".repeat(4) + " | (D)elete" + "".repeat(4));
-            table.addCell("".repeat(4) + " | (S)earch" + "".repeat(4));
-            table.addCell("".repeat(4) + " | Set r(o)w" + "".repeat(4));
-            table.addCell("".repeat(4) + " | (C)ommit" + "".repeat(4));
-            table.addCell("".repeat(4) + " | Bac(k) up" + "".repeat(4));
-            table.addCell("".repeat(4) + " | Res(t)ore" + "".repeat(4));
-            table.addCell("".repeat(4) + " | (H)elp" + "".repeat(4));
-            table.addCell("".repeat(4) + " | E(x)it" + "".repeat(4));
-
-            System.out.println(table.render());
+            Table table = new Table(5, BorderStyle.UNICODE_BOX_DOUBLE_BORDER_WIDE, ShownBorders.SURROUND);
+            table.addCell(" | Disp(l)ay");
+            table.addCell(" | Rando(m) ");
+            table.addCell(" | (W)rite  ");
+            table.addCell(" | (E)dit   ");
+            table.addCell(" | (D)elete ");
+            table.addCell(" | (S)earch ");
+            table.addCell(" | Set r(o)w");
+            table.addCell(" | (C)ommit ");
+            table.addCell(" | Bac(k) up");
+            table.addCell(" | Res(t)ore");
+            table.addCell(" | (H)elp   ");
+            table.addCell(" | E(x)it   ");
+            List<String> tableOpt;
+            tableOpt = Arrays.stream(table.renderAsStringArray()).toList();
+            for (String s : tableOpt) {
+                System.out.println(s);
+            }
             System.out.print("Command -> ");
             String options = sc.nextLine().toUpperCase();
 
@@ -96,6 +98,15 @@ public class ProductView {
                 case "W" -> productController.addProduct();
                 case "H" -> StockHelp.displayHelp();
                 case "C" -> productController.commitToDataSource();
+                case "M" -> {
+                    System.out.println("Insert number of products: ");
+                    String num = new Scanner(System.in).nextLine();
+                    while (!num.matches("\\d+")) {
+                        System.out.println("Invalid number, please try again");
+                        num = new Scanner(System.in).nextLine();
+                    }
+                    productController.generateReport(Integer.parseInt(num));
+                }
                 case "E" -> {
                     System.out.println("Have a Nice Day!! \uD83D\uDC7B\uD83D\uDC7B\uD83D\uDC7B");
                     System.exit(0);

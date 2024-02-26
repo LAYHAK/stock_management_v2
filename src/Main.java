@@ -5,7 +5,6 @@ import java.io.FileNotFoundException;
 
 public class Main {
     public static void main(String[] args) throws FileNotFoundException {
-        ProductController productController = new ProductController();
         ProductView.Menu.welcomeMsg();
         do {
             ProductView.Menu.createTable();
