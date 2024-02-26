@@ -7,7 +7,9 @@ public class Main {
     public static void main(String[] args) throws FileNotFoundException {
         ProductController productController = new ProductController();
         ProductView.Menu.welcomeMsg();
-        ProductView.Menu.createTable();
+        do {
+            ProductView.Menu.createTable();
+        }while (true);
 
 
 //        productController.gerneateReport(1000000);

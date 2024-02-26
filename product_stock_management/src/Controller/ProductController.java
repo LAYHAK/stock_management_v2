@@ -55,7 +55,7 @@ public class ProductController {
                     currentPage = paginationUtil.last(productDao.readAllTransaction(), rowPerPage, currentPage);
                 }
                 case "B" -> {
-                    return;
+                    return ;
                 }
                 default -> {
                     System.out.println("Please choose option above!");

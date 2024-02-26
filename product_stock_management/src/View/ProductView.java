@@ -89,16 +89,20 @@ public class ProductView {
 
             System.out.println(table.render());
             System.out.print("Command -> ");
-            String options = sc.nextLine();
+            String options = sc.nextLine().toUpperCase();
+
             switch (options) {
-                case "l", "L" -> productController.displayTransaction();
-                case "H", "h" -> StockHelp.displayHelp();
-                case "e", "E" -> {
+                case "L" -> productController.displayTransaction();
+                case "W" -> productController.addProduct();
+                case "H" -> StockHelp.displayHelp();
+                case "C" -> productController.commitToDataSource();
+                case "E" -> {
                     System.out.println("Have a Nice Day!! \uD83D\uDC7B\uD83D\uDC7B\uD83D\uDC7B");
                     System.exit(0);
                 }
                 default -> System.out.println("Invalid Option");
             }
+
         }
 
 
