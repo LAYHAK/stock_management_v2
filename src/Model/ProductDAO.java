@@ -5,19 +5,22 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ProductDAO {
-    private final String fileName = "dataSource.CSV";
+    private final String folderName = "src/transaction/";
+    private final String fileName = folderName + "transaction.dat";
 
-    public void addProduct(Product product) throws IOException {
-        BufferedWriter bw = new BufferedWriter(new FileWriter(fileName, true));
-        bw.write(product.getId() + "," + product.getName() + "," + product.getQuantity() + "," + product.getUnitPrice());
-        bw.newLine();
-        bw.close();
+
+    public void addProduct(Product product) {
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter(fileName, true))) {
+            bw.write(product.getId() + "," + product.getName() + "," + product.getQuantity() + "," + product.getUnitPrice());
+            bw.newLine();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
-    public List<Product> readAllTransaction(){
+    public List<Product> readAllTransaction() {
         List<Product> products = new ArrayList<>();
-        try ( BufferedReader br = new BufferedReader(new FileReader(fileName))){
-            ;
+        try (BufferedReader br = new BufferedReader(new FileReader(fileName))) {
             String line;
             while ((line = br.readLine()) != null) {
                 String[] productDetails = line.split(",");
