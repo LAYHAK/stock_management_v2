@@ -7,7 +7,6 @@ import service.Service;
 import service.ServiceImp;
 import util.PaginationUtil;
 
-import java.io.IOException;
 import java.util.Scanner;
 
 public class ProductController {
