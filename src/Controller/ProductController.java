@@ -10,14 +10,14 @@ import util.PaginationUtil;
 import java.util.Scanner;
 
 public class ProductController {
-    private int rowPerPage = 10;
-    private int currentPage = 1;
     private final ProductDAO productDao = new ProductDAO();
     private final ProductGenerator productGenerator = new ProductGenerator();
     private final ProductView productView = new ProductView();
     private final Service service = new ServiceImp();
     private final PaginationUtil paginationUtil = new PaginationUtil();
     private final Scanner scanner = new Scanner(System.in);
+    private int rowPerPage = 10;
+    private int currentPage = 1;
 
     public void addProduct() {
         service.addProduct();
@@ -32,12 +32,12 @@ public class ProductController {
         displayData();
     }
 
-    public void displayData(){
+    public void displayData() {
         do {
             productView.paginationOption();
             System.out.print("-> B)ack or Navigate page: ");
             String option = String.valueOf(scanner.next());
-            switch (option.toUpperCase()){
+            switch (option.toUpperCase()) {
                 case "F" -> {
                     currentPage = paginationUtil.first(productDao.readAllTransaction(), rowPerPage, currentPage);
                 }
@@ -54,18 +54,18 @@ public class ProductController {
                     currentPage = paginationUtil.last(productDao.readAllTransaction(), rowPerPage, currentPage);
                 }
                 case "B" -> {
-                    return ;
+                    return;
                 }
                 default -> {
                     System.out.println("Please choose option above!");
                 }
             }
-        }while (true);
+        } while (true);
     }
 
 
     public void generateReport(int numberOfProducts) {
-        service.generateReport(numberOfProducts);
+        service.generateReport(numberOfProducts, this.rowPerPage, this.currentPage);
     }
 
     public void searchProduct(String productName) {

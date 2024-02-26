@@ -5,7 +5,7 @@ public interface Service {
 
     void commitToDataSource();
 
-    void generateReport(int numberOfProducts);
+    void generateReport(int numberOfProducts, int rowPerPage, int currentPage);
 
     void searchProduct(String productName);
 }
