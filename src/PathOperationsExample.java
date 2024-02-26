@@ -1,19 +1,19 @@
+import java.io.IOException;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.nio.file.Files;
-import java.nio.file.attribute.FileAttribute;
-import java.io.IOException;
 
 public class PathOperationsExample {
     public static void main(String[] args) {
+
         // 1. Working with Relative and Absolute Paths
-        Path relativePath = Paths.get("some/relative/path");
+        Path relativePath = Paths.get("testing");
         Path absolutePath = relativePath.toAbsolutePath();
         System.out.println("Relative Path: " + relativePath);
         System.out.println("Converted to Absolute Path: " + absolutePath);
 
         // Preparing for symbolic link creation
-        Path targetFile = Paths.get("TargetFile.txt");
+        Path targetFile = Paths.get("testing/TargetFile.txt");
         try {
             // Ensure target file exists
             if (!Files.exists(targetFile)) {
@@ -23,7 +23,7 @@ public class PathOperationsExample {
             System.err.println("Error preparing target file: " + e.getMessage());
         }
 
-        Path symLink = Paths.get("SymLink");
+        Path symLink = Paths.get("testing/SymLink");
 
         // 2. Creating a Symbolic Link
         try {
