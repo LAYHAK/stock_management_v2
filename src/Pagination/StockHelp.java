@@ -1,8 +1,10 @@
 package Pagination;
 
+
 import org.nocrala.tools.texttablefmt.BorderStyle;
 import org.nocrala.tools.texttablefmt.ShownBorders;
 import org.nocrala.tools.texttablefmt.Table;
+
 public class StockHelp {
     public static void displayHelp(){
         Table helpTable = new Table(1, BorderStyle.UNICODE_BOX_DOUBLE_BORDER_WIDE ,  ShownBorders.SURROUND);
