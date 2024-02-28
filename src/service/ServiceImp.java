@@ -76,14 +76,13 @@ public class ServiceImp implements Service {
     public void generateReport(int numberOfProducts, int currentPage, int productsPerPage) {
         String folder = "src/transaction/";
         String filePath = folder + "transaction.dat";
-
-        // Calculate the starting ID based on the current page and products per page
-        int startingId = ((currentPage - 1) * productsPerPage) + 1;
+        //read from the file to get the last id
+        readingFile(filePath);
         // Generate new products starting from the calculated ID
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(filePath, true))) {
             Random random = new Random();
-            for (int i = 0; i < numberOfProducts; ++i) {
-                int newId = startingId + i; // Increment ID for each new product
+            for (int i = 1; i <= numberOfProducts; ++i) {
+                int newId = lastId + i;
                 String id = String.format("CSTAD::%05d", newId); // Format ID with leading zeros
                 String name = "Product::%d".formatted(newId); // Use newId to ensure uniqueness
                 int quantity = random.nextInt(100) + 1;

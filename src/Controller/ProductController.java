@@ -1,5 +1,6 @@
 package Controller;
 
+import Model.Product;
 import Model.ProductDAO;
 import Model.ProductGenerator;
 import View.ProductView;
@@ -28,6 +29,9 @@ public class ProductController {
     }
 
     public void displayTransaction() {
+        for (Product transaction : productDao.readAllTransaction()) {
+            System.out.println(transaction.getId());
+        }
         productView.displayProducts(productDao.readAllTransaction(), rowPerPage, currentPage);
         displayData();
     }
